@@ -78,6 +78,10 @@ public class PlayerInput : MonoBehaviour {
 		{
 			Debug.Log("AMMMEEEEERICA! FUCK YEAH!");
 		}
+		else if (tag == "tape")
+		{
+			Debug.Log("You hit da tape man!");
+		}
 	}
 
 	public void Release()
