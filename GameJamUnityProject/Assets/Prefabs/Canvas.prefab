@@ -188,7 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 114038911862577824}
-  score: 0
+  decreaseAmount: 0.1
+  decreaseTime: 0.1
+  score: 100
 --- !u!114 &114475573802308816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -433,7 +435,7 @@ Canvas:
   m_GameObject: {fileID: 1362034672949760}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

@@ -7,6 +7,8 @@ public class ScoreBar : MonoBehaviour {
 
 	float fillAmount;
 	public Image content;
+	public float decreaseAmount;
+	public float decreaseTime;
 
 	[RangeAttribute(0, 100)]
 	public float score;
@@ -16,9 +18,25 @@ public class ScoreBar : MonoBehaviour {
 	private float minYValue = 0f;
 	private float maxYvalue = 1f;
 
+	void Start()
+	{
+		StartCoroutine(IncreaseScore());
+	}
+
 	void Update()
 	{
 		HandleBar();
+		IncreaseScore();
+	}
+
+	public IEnumerator IncreaseScore()
+	{
+		float elapsedTime = 0;
+		while (score <= maxScore)
+		{
+			score -= decreaseAmount;
+			yield return new WaitForSeconds(decreaseTime);
+		}
 	}
 
 	void HandleBar()
