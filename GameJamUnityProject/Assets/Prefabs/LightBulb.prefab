@@ -126,7 +126,8 @@ AudioSource:
   m_GameObject: {fileID: 1654828634449614}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243442710042536642, guid: d2e990bc03dbd4f2e81143314a2c7dea,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -185,7 +186,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -261,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
+  breakingSound: {fileID: 8300000, guid: 423fdeeac22de4bfb818dd503dd7a98d, type: 3}
 --- !u!212 &212285286656609596
 SpriteRenderer:
   m_ObjectHideFlags: 1

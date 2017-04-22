@@ -13,13 +13,20 @@ public class Lightbulb : MonoBehaviour {
 	float damageMin, damageMax;
 	float timeSinceActive;
 
+	Light pointLight;
+	float startingLightValue;
 	Animator anim;
+	AudioSource source;
+	public AudioClip breakingSound;
 
 	void Awake(){
 		anim = GetComponent<Animator> ();
 	}
 
 	void Start () {
+		source = gameObject.GetComponent<AudioSource>();
+		pointLight = gameObject.GetComponentInChildren<Light>();
+		startingLightValue = pointLight.intensity;
 		StartCoroutine("EventUpdate");
 	} //
 		
@@ -28,7 +35,6 @@ public class Lightbulb : MonoBehaviour {
 			if (active) {
 				timeSinceActive += Time.deltaTime;
 				CheckForDamageable ();
-				// Debug.Log("Active: " + active + "timeSinceActive: " + timeSinceActive);
 			} 
 			if (damageable) {
 				StartCoroutine("IncreaseDamageRate");
@@ -50,10 +56,18 @@ public class Lightbulb : MonoBehaviour {
 		}
 	} //
 
-	void Tell(){
-		Debug.Log("Play tell animation");
+	IEnumerator Tell(){
+		float rnPitch = Random.Range(0.9f, 1.1f);
+		float rnVol = Random.Range(0.8f, 1f);
+		source.pitch = rnPitch;
+		source.PlayOneShot (breakingSound, rnVol);
+
+		yield return new WaitForSeconds(0.5f);
 		anim.SetBool ("active", true);
+		yield return new WaitForSeconds(0.15f);
 		active = true;
+		yield return new WaitForSeconds(0.35f);
+		pointLight.intensity = 0f;
 	} //
 		
 	void Feedback () {
@@ -72,13 +86,14 @@ public class Lightbulb : MonoBehaviour {
 	} //
 
 	public void SetActive() {
-		Tell ();
+		StartCoroutine("Tell");
 		EventSequenceController.activeObjectives++;
 	} //
 
 	public void SetInactive() {
 		EventSequenceController.activeObjectives--;
 		Feedback ();
+		pointLight.intensity = startingLightValue;
 		timeSinceActive = 0f;
 		damageSwitch = true;
 		active = false;
