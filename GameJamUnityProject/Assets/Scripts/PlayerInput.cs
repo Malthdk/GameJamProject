@@ -53,7 +53,8 @@ public class PlayerInput : MonoBehaviour {
 			Debug.Log("Zero Grav engaged");
 		}
 		else if (tag == "pump")	{
-			Debug.Log("Dooont you know pump it up!");
+			Spaceship.instance.Inflate();
+			Debug.Log("hiiiiiiiiiiti it");
 		}
 		else if (tag == "flag") {
 			if (hit.transform.GetComponent<Flag>().active) {

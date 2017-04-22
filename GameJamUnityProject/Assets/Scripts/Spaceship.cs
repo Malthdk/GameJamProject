@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spaceship : MonoBehaviour {
 
+	public static Spaceship instance;
+
 	public bool active;
 	bool damageSwitch;
 	float allowedReactionTime = 2f, tellDuration = 3f;
@@ -19,6 +21,12 @@ public class Spaceship : MonoBehaviour {
 
 	void Awake(){
 		anim = GetComponent<Animator> ();
+
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy (gameObject);    
+		}
 	}
 
 	void Start () {
@@ -48,18 +56,21 @@ public class Spaceship : MonoBehaviour {
 					ScoreBar.scoreDecreaseMultiplier -= damage;
 					damageSwitch = true;
 				}
-				anim.Play ("idle", 0, animRate);
+				anim.Play ("Active", 0, animRate);
 			}
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(1f);
 		} // while
 	} //
 
 	public void Inflate(){
+		Debug.Log(animRate);
 		if (animRate >= 0.3f) {
 			animRate -= 0.3f;
 		} else {
-			animRate == 0.0f;
+			animRate = 0.0f;
 		}
+		anim.Play ("Active", 0, animRate);
+
 	} //
 
 	public void SetInactive() {

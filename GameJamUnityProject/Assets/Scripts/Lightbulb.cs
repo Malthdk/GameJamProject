@@ -19,6 +19,8 @@ public class Lightbulb : MonoBehaviour {
 	AudioSource source;
 	public AudioClip breakingSound;
 
+	public ParticleSystem pSystemExplode;
+
 	void Awake(){
 		anim = GetComponent<Animator> ();
 	}
@@ -55,6 +57,7 @@ public class Lightbulb : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.5f);
 		anim.SetBool ("active", true);
+		pSystemExplode.Play();
 		yield return new WaitForSeconds(0.15f);
 		active = true;
 		timeSinceStart = Time.time;

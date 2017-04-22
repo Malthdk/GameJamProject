@@ -8,6 +8,7 @@ public class ScoreBar : MonoBehaviour {
 	public static ScoreBar instance;
 
 	public static float scoreDecreaseMultiplier = 1f;
+	public float scoreIncreaseMultiplier = 1.5f;
 
 	float fillAmount;
 	public Image content;
@@ -49,10 +50,16 @@ public class ScoreBar : MonoBehaviour {
 			if (scoreDecreaseMultiplier < 1f) {
 				scoreDecreaseMultiplier = 1f;
 			}
-
-			Debug.Log ("SCM: " + scoreDecreaseMultiplier);
+		
+			score += decreaseAmount * scoreIncreaseMultiplier;
 			score -= decreaseAmount * scoreDecreaseMultiplier;
+
+			if (score > 100f)
+			{
+				score = 100f;
+			}
 			yield return new WaitForSeconds(decreaseTime);
+
 		}
 	}
 
