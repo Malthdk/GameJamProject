@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class ScoreBar : MonoBehaviour {
 
+	public static ScoreBar instance;
+
+	public static float scoreDecreaseMultiplier = 1f;
+
 	float fillAmount;
 	public Image content;
 	public float decreaseAmount;
@@ -17,6 +21,14 @@ public class ScoreBar : MonoBehaviour {
 	private float maxScore = 100f;
 	private float minYValue = 0f;
 	private float maxYvalue = 1f;
+
+	void Awake(){
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy (gameObject);    
+		}
+	}
 
 	void Start()
 	{
@@ -34,7 +46,12 @@ public class ScoreBar : MonoBehaviour {
 		float elapsedTime = 0;
 		while (score <= maxScore)
 		{
-			score -= decreaseAmount;
+			if (scoreDecreaseMultiplier < 1f) {
+				scoreDecreaseMultiplier = 1f;
+			}
+
+			Debug.Log ("SCM: " + scoreDecreaseMultiplier);
+			score -= decreaseAmount * scoreDecreaseMultiplier;
 			yield return new WaitForSeconds(decreaseTime);
 		}
 	}

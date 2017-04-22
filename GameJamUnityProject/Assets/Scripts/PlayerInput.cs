@@ -19,44 +19,31 @@ public class PlayerInput : MonoBehaviour {
 	void Start () 
 	{
 		lightBulbs = GameObject.FindGameObjectsWithTag("bulb");
-		Debug.Log(lightBulbs.Length);
 	}
 
 	void Update () {
 		mouseClick = Input.GetMouseButtonDown(0);
 		mousHold = Input.GetMouseButton(0);
 		mouseRelease = Input.GetMouseButtonUp(0);
+
 		hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-		if (mouseClick){
-			Debug.Log("clicked mouse");
-
+		if (mouseClick) {
 			if (hit) {
-				ItemClicked(hit.transform.tag);
+				ItemClicked (hit.transform.tag);
+			} else {
+				//s
 			}
-			else  {
-				Debug.Log("No hit");
-			}
+		} else if (mouseRelease) {
+			Release ();
 		} 
-
-		if (mousHold) {
-			Debug.Log("held mouse");
-		}
-
-		if (mouseRelease) {
-			Release();
-		}
 	}
 		
 	public void ItemClicked (string tag) {
 
 		if (tag == "newBulb") {
-			Debug.Log("new lightbulb acquired");
 			if (mousHold)	{
 				lightBulbImage.enabled = true;
-			}
-			else if (mouseRelease)	{
-				lightBulbImage.enabled = false;
 			}
 		}
 
@@ -75,19 +62,13 @@ public class PlayerInput : MonoBehaviour {
 	}
 
 	public void Release() {
-		switch (hit.transform.tag) {
-		case "bulb":
+		if (hit.transform.tag == "bulb") {
 			if (hit.transform.GetComponent<Lightbulb>().active) {
-				Debug.Log ("Sets bulb to inactive");
 				hit.transform.GetComponent<Lightbulb> ().SetInactive ();
 				lightBulbImage.enabled = false;
-			}else {
-				Debug.Log ("wrong placement");
-				lightBulbImage.enabled = false;
 			}
-			break;
-		default:
-			break;
+		} else  {
+			lightBulbImage.enabled = false;
 		}
-	}
+	} // 
 }

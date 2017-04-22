@@ -10,6 +10,7 @@ TagManager:
   - pump
   - bulb
   - tape
+  - Default
   layers:
   - Default
   - TransparentFX

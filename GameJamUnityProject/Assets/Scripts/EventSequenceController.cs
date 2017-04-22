@@ -23,7 +23,6 @@ public class EventSequenceController : MonoBehaviour {
 		} else if (instance != this) {
 			Destroy (gameObject);    
 		}
-		DontDestroyOnLoad(gameObject);
 	}
 
 	void Start () {

@@ -5,13 +5,13 @@ using UnityEngine;
 public class Lightbulb : MonoBehaviour {
 
 	public bool active;
-	bool damageable, damageSwitch;
-	float allowedReactionTime = 2f;
-	float tellDuration = 3f;
-	float damageIncreaseRate = 0.2f;
-	float damageIncrease;
-	float damageMin, damageMax;
-	float timeSinceActive;
+	bool damageSwitch;
+	float allowedReactionTime = 2f, tellDuration = 3f;
+
+	[SerializeField]
+	float damage = 0.1f;
+
+	float timeSinceStart, timeSinceActive;
 
 	Light pointLight;
 	float startingLightValue;
@@ -33,13 +33,8 @@ public class Lightbulb : MonoBehaviour {
 	IEnumerator EventUpdate () {
 		while (true) {
 			if (active) {
-				timeSinceActive += Time.deltaTime;
+				timeSinceActive = Time.time - timeSinceStart;
 				CheckForDamageable ();
-			} 
-			if (damageable) {
-				StartCoroutine("IncreaseDamageRate");
-			} else {
-				damageIncrease = 0f;
 			}
 			yield return null;
 		}
@@ -47,25 +42,22 @@ public class Lightbulb : MonoBehaviour {
 
 	void CheckForDamageable() {
 		if (timeSinceActive > allowedReactionTime && damageSwitch) {
-			damageable = true;
-			StartCoroutine("IncreaseDamageRate");
+			ScoreBar.scoreDecreaseMultiplier += damage;
 			damageSwitch = false;
-		}
-		if (timeSinceActive < allowedReactionTime) {
-			damageable = false;
 		}
 	} //
 
 	IEnumerator Tell(){
 		float rnPitch = Random.Range(0.9f, 1.1f);
 		float rnVol = Random.Range(0.8f, 1f);
-		source.pitch = rnPitch;
+		// source.pitch = rnPitch;
 		source.PlayOneShot (breakingSound, rnVol);
 
 		yield return new WaitForSeconds(0.5f);
 		anim.SetBool ("active", true);
 		yield return new WaitForSeconds(0.15f);
 		active = true;
+		timeSinceStart = Time.time;
 		yield return new WaitForSeconds(0.35f);
 		pointLight.intensity = 0f;
 	} //
@@ -75,17 +67,8 @@ public class Lightbulb : MonoBehaviour {
 		Debug.Log("Play feedback sound/animation"); 
 	} //
 
-	IEnumerator IncreaseDamageRate () {
-		while (true) {
-			yield return new WaitForSeconds(0.2f);
-			damageIncrease += damageIncreaseRate;
-			if (damageIncrease > damageMax) {
-				damageIncrease = damageMax;
-			}
-		}
-	} //
-
 	public void SetActive() {
+		damageSwitch = true;
 		StartCoroutine("Tell");
 		EventSequenceController.activeObjectives++;
 	} //
@@ -93,8 +76,9 @@ public class Lightbulb : MonoBehaviour {
 	public void SetInactive() {
 		EventSequenceController.activeObjectives--;
 		Feedback ();
+		ScoreBar.scoreDecreaseMultiplier -= damage;
+		damageSwitch = true;
 		pointLight.intensity = startingLightValue;
-		timeSinceActive = 0f;
 		damageSwitch = true;
 		active = false;
 	} //
