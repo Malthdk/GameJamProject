@@ -40,6 +40,7 @@ public class ScoreBar : MonoBehaviour {
 	{
 		HandleBar();
 		IncreaseScore();
+		Debug.Log(score);
 	}
 
 	public IEnumerator IncreaseScore()
