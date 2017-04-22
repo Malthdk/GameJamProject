@@ -46,12 +46,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\MovingLightbulb.cs" />
      <Compile Include="Assets\Scripts\Astronaut.cs" />
      <Compile Include="Assets\Scripts\Canvas.cs" />
      <Compile Include="Assets\Scripts\Event.cs" />
      <Compile Include="Assets\Scripts\EventSequenceController.cs" />
      <Compile Include="Assets\Scripts\Flag.cs" />
      <Compile Include="Assets\Scripts\Lightbulb.cs" />
+     <Compile Include="Assets\Scripts\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\Spaceship.cs" />
      <Compile Include="Assets\Scripts\UserInput.cs" />
  <Reference Include="UnityEngine.UI">
