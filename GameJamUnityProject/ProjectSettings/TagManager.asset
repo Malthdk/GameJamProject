@@ -9,6 +9,7 @@ TagManager:
   - flag
   - pump
   - bulb
+  - tape
   layers:
   - Default
   - TransparentFX
