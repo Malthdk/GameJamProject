@@ -28,22 +28,18 @@ public class EventSequenceController : MonoBehaviour {
 					SetObjectiveActive (objectives[ran]);
 					yield return new WaitForSeconds (objectiveSequenceInterval);
 				}
-
-				SetObjectiveActive (FindInactiveObejctive ());
+				FindInactiveObjective ();
 				yield return new WaitForSeconds (objectiveSequenceInterval);
-				UpdateSequenceInterval ();
 			} // if active
 		}
 	} //
 
-	GameObject FindInactiveObejctive(){
-		ShuffleObjectiveArray (objectives);
-		foreach (GameObject go in objectives) {
-			if (!CheckIfOjectiveIsActive (go)) {
-				return go;
-				break;
-			}
-			Debug.Log ("FindInactiveEvent");
+	void FindInactiveObjective(){
+		int ran = Random.Range (0, objectives.Length);
+		if (!CheckIfOjectiveIsActive (objectives [ran])) {
+			SetObjectiveActive (objectives [ran]);
+		} else {
+			FindInactiveObjective();
 		}
 	} //
 
@@ -63,7 +59,7 @@ public class EventSequenceController : MonoBehaviour {
 	bool CheckIfOjectiveIsActive(GameObject objective){
 		switch (objective.tag) {
 		case "bulb":
-			// return objective.GetComponent<Lightbulb> ().active;
+			return objective.GetComponent<Lightbulb> ().active;
 			break;
 //		case "rope":
 //			// return objective.GetComponent<Lightbulb> ().active;
@@ -78,6 +74,7 @@ public class EventSequenceController : MonoBehaviour {
 //			// return objective.GetComponent<Lightbulb> ().active;
 //			break;
 		default:
+			return true;
 			break;
 		}
 	}
@@ -125,7 +122,7 @@ public class EventSequenceController : MonoBehaviour {
 	void SetObjectiveActive(GameObject objective){
 		switch (objective.tag) {
 		case "bulb":
-			// objective.GetComponent<Lightbulb> ().SetActive ();
+			objective.GetComponent<Lightbulb> ().SetActive ();
 			break;
 //		case "rope":
 //			// objective.GetComponent<Lightbulb> ().SetActive ();
