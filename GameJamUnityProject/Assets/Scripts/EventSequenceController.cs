@@ -11,7 +11,7 @@ public class EventSequenceController : MonoBehaviour {
 	public bool active;
 	bool firstObjective;
 	int stages; 
-	int gameTimer;
+	public int gameTimer;
 	float objectiveSequenceInterval = 3.5f;
 
 	[SerializeField]
@@ -79,9 +79,9 @@ public class EventSequenceController : MonoBehaviour {
 		case "flag":
  			return objective.GetComponent<Flag> ().active;
 			break;
-//		case "pump":
-//			// return objective.GetComponent<Lightbulb> ().active;
-//			break;
+		case "spaceship":
+			return objective.GetComponent<Spaceship>().active;
+			break;
 //		case "tape":
 //			// return objective.GetComponent<Lightbulb> ().active;
 //			break;
@@ -142,9 +142,9 @@ public class EventSequenceController : MonoBehaviour {
 		case "flag":
 			objective.GetComponent<Flag> ().SetActive ();
 			break;
-//		case "pump":
-//			// objective.GetComponent<Lightbulb> ().SetActive ();
-//			break;
+		case "spaceship":
+			objective.GetComponent<Spaceship> ().SetActive ();
+			break;
 //		case "tape":
 //			// objective.GetComponent<Lightbulb> ().SetActive ();
 //			break;

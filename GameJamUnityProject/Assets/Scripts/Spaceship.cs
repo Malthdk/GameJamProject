@@ -30,13 +30,10 @@ public class Spaceship : MonoBehaviour {
 	}
 
 	void Start () {
-		StartCoroutine("EventUpdate");
 		StartCoroutine ("Pump");
-		float ran = Random.Range (6f,10f);
-		Invoke ("SetActive", ran);
 	} //
 		
-	void SetActive() {
+	public void SetActive() {
 		anim.SetBool ("active", true);
 		active = true;
 		timeSinceStart = Time.time;
@@ -45,10 +42,14 @@ public class Spaceship : MonoBehaviour {
 	IEnumerator Pump(){
 		while (true) {
 			if (active) {
-				animRate += 0.01f;
+				
+				animRate += 0.1f;
 				if (animRate > 0.9f) {
 					animRate = 0.9f;
 				}
+
+				anim.Play ("Active", 0, animRate);
+
 				if(animRate > 0.7f && damageSwitch){
 					ScoreBar.scoreDecreaseMultiplier += damage;
 					damageSwitch = false;
@@ -56,25 +57,26 @@ public class Spaceship : MonoBehaviour {
 					ScoreBar.scoreDecreaseMultiplier -= damage;
 					damageSwitch = true;
 				}
-				anim.Play ("Active", 0, animRate);
+
 			}
-			yield return new WaitForSeconds(1f);
+			yield return new WaitForSeconds(0.3f);
 		} // while
 	} //
 
 	public void Inflate(){
 		Debug.Log(animRate);
-		if (animRate >= 0.3f) {
-			animRate -= 0.3f;
+		if (animRate >= 0.15f) {
+			animRate -= 0.15f;
 		} else {
 			animRate = 0.0f;
+			active = false;
 		}
 		anim.Play ("Active", 0, animRate);
 
-	} //
+		if (animRate == 0.0f) {
+			active = false;
+			anim.SetBool ("active", false);
+		}
 
-	public void SetInactive() {
-		active = false;
 	} //
-
 }

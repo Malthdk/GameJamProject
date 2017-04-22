@@ -11,6 +11,7 @@ TagManager:
   - bulb
   - tape
   - Default
+  - spaceship
   layers:
   - Default
   - TransparentFX
