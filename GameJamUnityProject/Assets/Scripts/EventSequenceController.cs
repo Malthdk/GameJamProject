@@ -27,6 +27,7 @@ public class EventSequenceController : MonoBehaviour {
 
 	void Start () {
 		StartCoroutine ("ObjectiveControllerUpdate");
+		StartCoroutine("UpdateSequenceInterval");
 	}
 		
 
@@ -34,7 +35,6 @@ public class EventSequenceController : MonoBehaviour {
 		while (true) {
 			if (active) {
 				if (firstObjective) {
-					StartCoroutine("UpdateSequenceInterval");
 					firstObjective = false;
 					int ran = Random.Range (0, objectives.Length);
 					SetObjectiveActive (objectives[ran]);
@@ -94,27 +94,27 @@ public class EventSequenceController : MonoBehaviour {
 	IEnumerator UpdateSequenceInterval(){
 		while (true) {
 			yield return new WaitForSeconds (1f);
-			gameTimer++; 
-
-			switch (gameTimer) {
-			case 10:
-				objectiveSequenceInterval = 3f;
-				break;
-			case 20:
-				objectiveSequenceInterval = 2.5f;
-				break;
-			case 30:
-				objectiveSequenceInterval = 2f;
-				break;
-			case 40:
-				objectiveSequenceInterval = 1.5f;
-				break;
-			case 50:
-				objectiveSequenceInterval = 1f;
-				break;
-			default:
-				break;
-			} // switch
+			gameTimer--; 
+			Debug.Log("hi");
+//			switch (gameTimer) {
+//			case 10:
+//				objectiveSequenceInterval = 3f;
+//				break;
+//			case 20:
+//				objectiveSequenceInterval = 2.5f;
+//				break;
+//			case 30:
+//				objectiveSequenceInterval = 2f;
+//				break;
+//			case 40:
+//				objectiveSequenceInterval = 1.5f;
+//				break;
+//			case 50:
+//				objectiveSequenceInterval = 1f;
+//				break;
+//			default:
+//				break;
+//			} // switch
 		}
 	} //
 
