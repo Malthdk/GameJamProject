@@ -18,43 +18,35 @@ public class PlayerInput : MonoBehaviour {
 		
 	}
 
-	void Update () 
-	{
+	void Update () {
 		mouseClick = Input.GetMouseButtonDown(0);
 		mousHold = Input.GetMouseButton(0);
 		mouseRelease = Input.GetMouseButtonUp(0);
 
-		if (mouseClick)
-		{
+		if (mouseClick){
 			Debug.Log("clicked mouse");
 
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-			if (hit)
-			{
+			if (hit)	{
 				ItemClicked(hit.transform.gameObject.tag);
 			}
-			else 
-			{
+			else  {
 				Debug.Log("No hit");
 			}
 		} 
-		if (mousHold)
-		{
+		if (mousHold) {
 			Debug.Log("held mouse");
 		}
 
-		if (mouseRelease)
-		{
+		if (mouseRelease) {
 			Release();
 		}
 	}
 
 
-	public void ItemClicked (string tag)
-	{
-		if (tag == "newBulb")
-		{
+	public void ItemClicked (string tag) {
+		if (tag == "newBulb") {
 			Debug.Log("new lightbulb acquired");
 
 			if (mousHold)
@@ -84,8 +76,8 @@ public class PlayerInput : MonoBehaviour {
 		}
 	}
 
-	public void Release()
-	{
+	public void Release() {
+		Debug.Log("RELEASE");
 		if ( lightBulb.enabled == true)
 		{
 			lightBulb.enabled = false;
