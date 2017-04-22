@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour {
 	bool mouseClick;
 	bool mousHold;
 	bool mouseRelease;
+	bool draggingBulb;
 
 	//Lightbulb
 	public Image lightBulbImage;
@@ -44,6 +45,7 @@ public class PlayerInput : MonoBehaviour {
 		if (tag == "newBulb") {
 			if (mousHold)	{
 				lightBulbImage.enabled = true;
+				draggingBulb = true;
 			}
 		}
 
@@ -54,7 +56,9 @@ public class PlayerInput : MonoBehaviour {
 			Debug.Log("Dooont you know pump it up!");
 		}
 		else if (tag == "flag") {
-			Debug.Log("AMMMEEEEERICA! FUCK YEAH!");
+			if (hit.transform.GetComponent<Flag>().active) {
+				hit.transform.GetComponent<Flag>().SetInactive();
+			}
 		}
 		else if (tag == "tape")	{
 			Debug.Log("You hit da tape man!");
@@ -63,12 +67,16 @@ public class PlayerInput : MonoBehaviour {
 
 	public void Release() {
 		if (hit.transform.tag == "bulb") {
-			if (hit.transform.GetComponent<Lightbulb>().active) {
+			if (hit.transform.GetComponent<Lightbulb>().active && draggingBulb) {
 				hit.transform.GetComponent<Lightbulb> ().SetInactive ();
 				lightBulbImage.enabled = false;
+			} else  {
+				lightBulbImage.enabled = false;
+				draggingBulb = false;
 			}
 		} else  {
 			lightBulbImage.enabled = false;
+			draggingBulb = false;
 		}
 	} // 
 }
