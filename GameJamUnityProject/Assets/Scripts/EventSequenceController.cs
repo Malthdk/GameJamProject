@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EventSequenceController : MonoBehaviour {
 
+	public static EventSequenceController instance; 
+
+	public static int activeObjectives;
+
 	public bool active;
 	bool firstObjective;
 	int stages; 
@@ -12,6 +16,15 @@ public class EventSequenceController : MonoBehaviour {
 
 	[SerializeField]
 	GameObject[] objectives;
+
+	void Awake(){
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy (gameObject);    
+		}
+		DontDestroyOnLoad(gameObject);
+	}
 
 	void Start () {
 		StartCoroutine ("ObjectiveControllerUpdate");
@@ -38,26 +51,26 @@ public class EventSequenceController : MonoBehaviour {
 		int ran = Random.Range (0, objectives.Length);
 		if (!CheckIfOjectiveIsActive (objectives [ran])) {
 			SetObjectiveActive (objectives [ran]);
-		} else {
+		} else if (activeObjectives < objectives.Length){
 			FindInactiveObjective();
 		}
 	} //
 
-	void ShuffleObjectiveArray(GameObject[] obj)
-	{
-		// Knuth shuffle algorithm :: courtesy of Wikipedia :)
-		for (int t = 0; t < obj.Length; t++ )
-		{
-			GameObject tmp = obj[t];
-			int r = Random.Range(t, obj.Length);
-			obj[t] = obj[r];
-			obj[r] = tmp;
-		}
-	} //
+//	void ShuffleObjectiveArray(GameObject[] obj)
+//	{
+//		// Knuth shuffle algorithm :: courtesy of Wikipedia :)
+//		for (int t = 0; t < obj.Length; t++ )
+//		{
+//			GameObject tmp = obj[t];
+//			int r = Random.Range(t, obj.Length);
+//			obj[t] = obj[r];
+//			obj[r] = tmp;
+//		}
+//	} //
 
 
 	bool CheckIfOjectiveIsActive(GameObject objective){
-		switch (objective.tag) {
+		switch (objective.transform.tag) {
 		case "bulb":
 			return objective.GetComponent<Lightbulb> ().active;
 			break;

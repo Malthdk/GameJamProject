@@ -23,7 +23,7 @@ public class Lightbulb : MonoBehaviour {
 			if (active) {
 				timeSinceActive += Time.deltaTime;
 				CheckForDamageable ();
-				Debug.Log("Active: " + active + "timeSinceActive: " + timeSinceActive);
+				// Debug.Log("Active: " + active + "timeSinceActive: " + timeSinceActive);
 			} 
 			if (damageable) {
 				StartCoroutine("IncreaseDamageRate");
@@ -67,9 +67,11 @@ public class Lightbulb : MonoBehaviour {
 
 	public void SetActive() {
 		StartCoroutine("Tell");
+		EventSequenceController.activeObjectives++;
 	} //
 
 	public void SetInactive() {
+		EventSequenceController.activeObjectives--;
 		Feedback ();
 		timeSinceActive = 0f;
 		damageSwitch = true;

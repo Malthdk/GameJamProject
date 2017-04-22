@@ -26,19 +26,19 @@ public class PlayerInput : MonoBehaviour {
 		mouseClick = Input.GetMouseButtonDown(0);
 		mousHold = Input.GetMouseButton(0);
 		mouseRelease = Input.GetMouseButtonUp(0);
+		hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
 		if (mouseClick){
 			Debug.Log("clicked mouse");
 
-			hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-			if (hit)	{
-				ItemClicked(hit.transform.gameObject.tag);
+			if (hit) {
+				ItemClicked(hit.transform.tag);
 			}
 			else  {
 				Debug.Log("No hit");
 			}
 		} 
+
 		if (mousHold) {
 			Debug.Log("held mouse");
 		}
@@ -49,9 +49,9 @@ public class PlayerInput : MonoBehaviour {
 	}
 		
 	public void ItemClicked (string tag) {
+
 		if (tag == "newBulb") {
 			Debug.Log("new lightbulb acquired");
-
 			if (mousHold)	{
 				lightBulbImage.enabled = true;
 			}
@@ -59,6 +59,7 @@ public class PlayerInput : MonoBehaviour {
 				lightBulbImage.enabled = false;
 			}
 		}
+
 		else if (tag == "rope")	{
 			Debug.Log("Zero Grav engaged");
 		}
@@ -74,9 +75,19 @@ public class PlayerInput : MonoBehaviour {
 	}
 
 	public void Release() {
-		Debug.Log("RELEASE");
-		if (lightBulbImage.enabled == true) {
-			lightBulbImage.enabled = false;
+		switch (hit.transform.tag) {
+		case "bulb":
+			if (hit.transform.GetComponent<Lightbulb>().active) {
+				Debug.Log ("Sets bulb to inactive");
+				hit.transform.GetComponent<Lightbulb> ().SetInactive ();
+				lightBulbImage.enabled = false;
+			}else {
+				Debug.Log ("wrong placement");
+				lightBulbImage.enabled = false;
+			}
+			break;
+		default:
+			break;
 		}
 	}
 }

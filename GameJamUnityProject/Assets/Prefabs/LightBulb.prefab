@@ -37,9 +37,10 @@ GameObject:
   - component: {fileID: 4846024298154598}
   - component: {fileID: 212285286656609596}
   - component: {fileID: 114900622996240654}
+  - component: {fileID: 58705133942970526}
   m_Layer: 0
   m_Name: LightBulb
-  m_TagString: Untagged
+  m_TagString: bulb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,6 +72,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 540}
+--- !u!58 &58705133942970526
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1654828634449614}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10.24
 --- !u!108 &108549581544451444
 Light:
   m_ObjectHideFlags: 1
