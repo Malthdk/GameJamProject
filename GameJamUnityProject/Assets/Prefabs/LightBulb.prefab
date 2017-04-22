@@ -53,9 +53,9 @@ GameObject:
   - component: {fileID: 4846024298154598}
   - component: {fileID: 212285286656609596}
   - component: {fileID: 114900622996240654}
-  - component: {fileID: 58705133942970526}
   - component: {fileID: 95112042846900586}
   - component: {fileID: 82447553306918034}
+  - component: {fileID: 58686309305168082}
   m_Layer: 0
   m_Name: LightBulb
   m_TagString: bulb
@@ -104,7 +104,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58705133942970526
+--- !u!58 &58686309305168082
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -117,7 +117,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 10.24
+  m_Radius: 2.56
 --- !u!82 &82447553306918034
 AudioSource:
   m_ObjectHideFlags: 1
@@ -207,7 +207,7 @@ Animator:
   m_GameObject: {fileID: 1654828634449614}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b2298c2333fb44839befad8c4f8f99c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -261,7 +261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  difficulty: 0
 --- !u!212 &212285286656609596
 SpriteRenderer:
   m_ObjectHideFlags: 1

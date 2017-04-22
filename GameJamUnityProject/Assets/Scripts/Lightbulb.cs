@@ -5,7 +5,6 @@ using UnityEngine;
 public class Lightbulb : MonoBehaviour {
 
 	public bool active;
-	public int difficulty;
 	bool damageable, damageSwitch;
 	float allowedReactionTime = 2f;
 	float tellDuration = 3f;
@@ -13,6 +12,12 @@ public class Lightbulb : MonoBehaviour {
 	float damageIncrease;
 	float damageMin, damageMax;
 	float timeSinceActive;
+
+	Animator anim;
+
+	void Awake(){
+		anim = GetComponent<Animator> ();
+	}
 
 	void Start () {
 		StartCoroutine("EventUpdate");
@@ -45,13 +50,14 @@ public class Lightbulb : MonoBehaviour {
 		}
 	} //
 
-	IEnumerator Tell () {
+	void Tell(){
 		Debug.Log("Play tell animation");
-		yield return new WaitForSeconds(tellDuration);
+		anim.SetBool ("active", true);
 		active = true;
 	} //
-
+		
 	void Feedback () {
+		anim.SetBool ("active", false);
 		Debug.Log("Play feedback sound/animation"); 
 	} //
 
@@ -66,7 +72,7 @@ public class Lightbulb : MonoBehaviour {
 	} //
 
 	public void SetActive() {
-		StartCoroutine("Tell");
+		Tell ();
 		EventSequenceController.activeObjectives++;
 	} //
 
