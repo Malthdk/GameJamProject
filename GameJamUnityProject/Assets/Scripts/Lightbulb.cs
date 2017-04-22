@@ -8,31 +8,27 @@ public class Lightbulb : MonoBehaviour {
 	public int difficulty;
 	bool damageable, damageSwitch;
 	float allowedReactionTime = 2f;
-	float tellDuration = 4f;
-	float damageIncreaseRate;
+	float tellDuration = 3f;
+	float damageIncreaseRate = 0.2f;
 	float damageIncrease;
 	float damageMin, damageMax;
 	float timeSinceActive;
 
-	// Use this for initialization
 	void Start () {
 		StartCoroutine("EventUpdate");
-	}
-
-	// Update is called once per frame
+	} //
+		
 	IEnumerator EventUpdate () {
 		while (true) {
 			if (active) {
 				timeSinceActive += Time.deltaTime;
 				CheckForDamageable ();
 				Debug.Log("Active: " + active + "timeSinceActive: " + timeSinceActive);
+			} 
+			if (damageable) {
+				StartCoroutine("IncreaseDamageRate");
 			} else {
-				timeSinceActive = 0f;
-				if (damageable) {
-
-				} else {
-
-				}
+				damageIncrease = 0f;
 			}
 			yield return null;
 		}
@@ -40,8 +36,12 @@ public class Lightbulb : MonoBehaviour {
 
 	void CheckForDamageable() {
 		if (timeSinceActive > allowedReactionTime && damageSwitch) {
+			damageable = true;
 			StartCoroutine("IncreaseDamageRate");
 			damageSwitch = false;
+		}
+		if (timeSinceActive < allowedReactionTime) {
+			damageable = false;
 		}
 	} //
 
@@ -70,6 +70,7 @@ public class Lightbulb : MonoBehaviour {
 	} //
 
 	public void SetInactive() {
+		Feedback ();
 		timeSinceActive = 0f;
 		damageSwitch = true;
 		active = false;
