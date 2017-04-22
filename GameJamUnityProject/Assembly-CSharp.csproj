@@ -46,16 +46,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\MovingLightbulb.cs" />
+     <Compile Include="Assets\AnimationTest.cs" />
      <Compile Include="Assets\Scripts\Astronaut.cs" />
-     <Compile Include="Assets\Scripts\Canvas.cs" />
      <Compile Include="Assets\Scripts\Event.cs" />
      <Compile Include="Assets\Scripts\EventSequenceController.cs" />
+     <Compile Include="Assets\Scripts\FilmCanvas.cs" />
      <Compile Include="Assets\Scripts\Flag.cs" />
      <Compile Include="Assets\Scripts\Lightbulb.cs" />
+     <Compile Include="Assets\Scripts\MovingLightbulb.cs" />
      <Compile Include="Assets\Scripts\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\ScoreBar.cs" />
      <Compile Include="Assets\Scripts\Spaceship.cs" />
+     <Compile Include="Assets\TimerScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

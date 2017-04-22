@@ -62,7 +62,9 @@ public class PlayerInput : MonoBehaviour {
 			}
 		}
 		else if (tag == "tape")	{
-			Debug.Log("You hit da tape man!");
+			if (hit.transform.GetComponent<FilmCanvas>().active) {
+				hit.transform.GetComponent<FilmCanvas>().SetInactive();
+			}
 		}
 	}
 

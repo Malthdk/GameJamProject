@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flag : MonoBehaviour {
+public class FilmCanvas : MonoBehaviour {
 
 	public bool active;
 	bool damageSwitch;
@@ -15,8 +15,8 @@ public class Flag : MonoBehaviour {
 
 	Animator anim;
 	AudioSource source;
-	public AudioClip flagDownSound;
-	public AudioClip flagUpSound;
+	public AudioClip canvasFalling;
+	public AudioClip canvasFixing;
 
 	void Awake(){
 		anim = GetComponent<Animator> ();
@@ -45,10 +45,8 @@ public class Flag : MonoBehaviour {
 	} //
 
 	IEnumerator Tell(){
-		float rnPitch = Random.Range(0.9f, 1.1f);
 		float rnVol = Random.Range(0.8f, 1f);
-		// source.pitch = rnPitch;
-		source.PlayOneShot (flagDownSound, rnVol);
+		source.PlayOneShot (canvasFalling, rnVol);
 
 		yield return new WaitForSeconds(0.5f);
 		anim.SetBool ("active", true);
@@ -62,7 +60,7 @@ public class Flag : MonoBehaviour {
 	} //
 
 	public void SetActive() {
-//		Debug.Log("FLAG ACTIVE");
+		Debug.Log("CANVAS ACTIVE");
 		damageSwitch = true;
 		StartCoroutine("Tell");
 		EventSequenceController.activeObjectives++;

@@ -82,9 +82,9 @@ public class EventSequenceController : MonoBehaviour {
 		case "spaceship":
 			return objective.GetComponent<Spaceship>().active;
 			break;
-//		case "tape":
-//			// return objective.GetComponent<Lightbulb> ().active;
-//			break;
+		case "tape":
+			return objective.GetComponent<FilmCanvas> ().active;
+			break;
 		default:
 			return true;
 			break;
@@ -145,9 +145,9 @@ public class EventSequenceController : MonoBehaviour {
 		case "spaceship":
 			objective.GetComponent<Spaceship> ().SetActive ();
 			break;
-//		case "tape":
-//			// objective.GetComponent<Lightbulb> ().SetActive ();
-//			break;
+		case "tape":
+			objective.GetComponent<FilmCanvas> ().SetActive ();
+			break;
 		default:
 			break;
 		}
