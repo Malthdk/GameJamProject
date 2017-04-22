@@ -15,62 +15,52 @@ public class Spaceship : MonoBehaviour {
 
 	Animator anim;
 
+	float animRate;
+
 	void Awake(){
 		anim = GetComponent<Animator> ();
 	}
 
 	void Start () {
 		StartCoroutine("EventUpdate");
+		StartCoroutine ("Pump");
 		float ran = Random.Range (6f,10f);
 		Invoke ("SetActive", ran);
 	} //
-
-	IEnumerator EventUpdate () {
-		while (true) {
-			if (active) {
-				timeSinceActive = Time.time - timeSinceStart;
-				CheckForDamageable ();
-			}
-			yield return null;
-		}
-	} //
-
-	void CheckForDamageable() {
-		if (timeSinceActive > allowedReactionTime && damageSwitch) {
-			ScoreBar.scoreDecreaseMultiplier += damage;
-			damageSwitch = false;
-		} else if (timeSinceActive < allowedReactionTime && !damageSwitch){
-			ScoreBar.scoreDecreaseMultiplier -= damage;
-			damageSwitch = true;
-		}
-	} //
-
-	void Tell(){
-		Debug.Log("Play tell animation");
+		
+	void SetActive() {
 		anim.SetBool ("active", true);
 		active = true;
-	} //
-
-	void Feedback () {
-		anim.SetBool ("active", false);
-		Debug.Log("Play feedback sound/animation"); 
-	} //
-		
-
-	void SetActive() {
-		active = false;
 		timeSinceStart = Time.time;
+	} //
+
+	IEnumerator Pump(){
+		while (true) {
+			if (active) {
+				animRate += 0.01f;
+				if (animRate > 0.9f) {
+					animRate = 0.9f;
+				}
+				if(animRate > 0.7f && damageSwitch){
+					ScoreBar.scoreDecreaseMultiplier += damage;
+					damageSwitch = false;
+				}else if (animRate < 0.7f && !damageSwitch) {
+					ScoreBar.scoreDecreaseMultiplier -= damage;
+					damageSwitch = true;
+				}
+				anim.Play ("idle", 0, animRate);
+			}
+			yield return new WaitForSeconds(0.1f);
+		} // while
 	} //
 
 	public void Inflate(){
-		timeSinceActive = 0f;
-	}
-
-	void Deflate(){
-		timeSinceStart = Time.time;
-		damageSwitch = true;
-		// deflate
-	}
+		if (animRate >= 0.3f) {
+			animRate -= 0.3f;
+		} else {
+			animRate == 0.0f;
+		}
+	} //
 
 	public void SetInactive() {
 		active = false;
