@@ -7,7 +7,7 @@ public class PlayerInput : MonoBehaviour {
 
 	//Input bools
 	bool mouseClick;
-	bool mousHold;
+	bool mouseHold;
 	bool mouseRelease;
 	bool draggingBulb;
 
@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviour {
 
 	void Update () {
 		mouseClick = Input.GetMouseButtonDown(0);
-		mousHold = Input.GetMouseButton(0);
+		mouseHold = Input.GetMouseButton(0);
 		mouseRelease = Input.GetMouseButtonUp(0);
 
 		hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -37,20 +37,26 @@ public class PlayerInput : MonoBehaviour {
 			}
 		} else if (mouseRelease) {
 			Release ();
-		} 
+		} else if (mouseHold) {
+			
+		}
 	}
 		
 	public void ItemClicked (string tag) {
 
 		if (tag == "newBulb") {
-			if (mousHold)	{
+			if (mouseHold)	{
 				lightBulbImage.enabled = true;
 				draggingBulb = true;
 			}
 		}
 
 		else if (tag == "rope")	{
-			Debug.Log("Zero Grav engaged");
+			if (mouseHold) {
+				Astronaut.instance.Lift ();
+			} else {
+				Astronaut.instance.NotLifting ();
+			}
 		}
 		else if (tag == "pump")	{
 			Spaceship.instance.Inflate();
@@ -66,7 +72,7 @@ public class PlayerInput : MonoBehaviour {
 				hit.transform.GetComponent<FilmCanvas>().SetInactive();
 			}
 		}
-	}
+	}		
 
 	public void Release() {
 		if (hit.transform.tag == "bulb") {
@@ -80,6 +86,7 @@ public class PlayerInput : MonoBehaviour {
 		} else  {
 			lightBulbImage.enabled = false;
 			draggingBulb = false;
+			Astronaut.instance.NotLifting ();
 		}
 	} // 
 }

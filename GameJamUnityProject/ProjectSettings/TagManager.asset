@@ -12,6 +12,8 @@ TagManager:
   - tape
   - Default
   - spaceship
+  - ground
+  - astronaut
   layers:
   - Default
   - TransparentFX

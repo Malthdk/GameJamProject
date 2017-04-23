@@ -37,6 +37,8 @@ public class Spaceship : MonoBehaviour {
 		anim.SetBool ("active", true);
 		active = true;
 		timeSinceStart = Time.time;
+		EventSequenceController.activeObjectives++;
+
 	} //
 
 	IEnumerator Pump(){
@@ -76,6 +78,7 @@ public class Spaceship : MonoBehaviour {
 		if (animRate == 0.0f) {
 			active = false;
 			anim.SetBool ("active", false);
+			EventSequenceController.activeObjectives--;
 		}
 
 	} //
