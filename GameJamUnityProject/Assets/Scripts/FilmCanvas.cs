@@ -19,11 +19,11 @@ public class FilmCanvas : MonoBehaviour {
 	public AudioClip canvasFixing;
 
 	void Awake(){
+		source = gameObject.GetComponent<AudioSource>();
 		anim = GetComponent<Animator> ();
 	}
 
 	void Start () {
-		source = gameObject.GetComponent<AudioSource>();
 		StartCoroutine("EventUpdate");
 	} //
 
@@ -45,9 +45,10 @@ public class FilmCanvas : MonoBehaviour {
 	} //
 
 	IEnumerator Tell(){
+		float rnPitch = Random.Range (0.9f, 1.1f);
+		source.pitch = rnPitch;
 		float rnVol = Random.Range(0.8f, 1f);
 		source.PlayOneShot (canvasFalling, rnVol);
-
 		yield return new WaitForSeconds(0.5f);
 		anim.SetBool ("active", true);
 		active = true;
@@ -56,7 +57,8 @@ public class FilmCanvas : MonoBehaviour {
 
 	void Feedback () {
 		anim.SetBool ("active", false);
-		Debug.Log("Play feedback sound/animation"); 
+		float rnVol = Random.Range(0.8f, 1f);
+		source.PlayOneShot (canvasFixing, rnVol);
 	} //
 
 	public void SetActive() {

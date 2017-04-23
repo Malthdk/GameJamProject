@@ -111,7 +111,8 @@ AudioSource:
   m_GameObject: {fileID: 1689993701893058}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243656503875775386, guid: d2e990bc03dbd4f2e81143314a2c7dea,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -213,8 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   damage: 0.1
-  canvasFalling: {fileID: 0}
-  canvasFixing: {fileID: 0}
+  canvasFalling: {fileID: 8300000, guid: c9e5398bd804643648809d001ec195b9, type: 3}
+  canvasFixing: {fileID: 8300000, guid: abcf8f3b9cdce4a7ea02635ffb8731bd, type: 3}
 --- !u!212 &212076497642107362
 SpriteRenderer:
   m_ObjectHideFlags: 1

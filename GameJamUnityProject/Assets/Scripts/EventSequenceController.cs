@@ -14,8 +14,13 @@ public class EventSequenceController : MonoBehaviour {
 	public int gameTimer;
 	float objectiveSequenceInterval = 3.5f;
 
+	bool allow;
+
 	[SerializeField]
 	GameObject[] objectives;
+	GameObject prevObj;
+
+	int objectiveIdx;
 
 	void Awake(){
 		if (instance == null) {
@@ -34,38 +39,49 @@ public class EventSequenceController : MonoBehaviour {
 	IEnumerator ObjectiveControllerUpdate () {
 		while (true) {
 			if (active) {
-				if (firstObjective) {
-					firstObjective = false;
-					int ran = Random.Range (0, objectives.Length);
-					SetObjectiveActive (objectives[ran]);
-					yield return new WaitForSeconds (objectiveSequenceInterval);
-				}
-				FindInactiveObjective ();
+				ShuffleObjectiveArray(objectives);
+				FindInactiveObjective ();	
 				yield return new WaitForSeconds (objectiveSequenceInterval);
 			} // if active
 		}
 	} //
 
 	void FindInactiveObjective(){
-		int ran = Random.Range (0, objectives.Length);
-		if (!CheckIfOjectiveIsActive (objectives [ran])) {
-			SetObjectiveActive (objectives [ran]);
-		} else if (activeObjectives < objectives.Length){
-			FindInactiveObjective();
+		for (int i = 0; i < objectives.Length; i++) {
+			if (!CheckIfOjectiveIsActive (objectives [i])) {
+				SetObjectiveActive (objectives [i]);
+				/*if (activeObjectives != objectives.Length) {
+					CheckPreviousObjective (objectives [i]);
+					prevObj = objectives[i];
+				} else {
+					SetObjectiveActive(objectives [i]);
+				}*/
+				break;
+			}	
 		}
 	} //
 
-//	void ShuffleObjectiveArray(GameObject[] obj)
-//	{
-//		// Knuth shuffle algorithm :: courtesy of Wikipedia :)
-//		for (int t = 0; t < obj.Length; t++ )
-//		{
-//			GameObject tmp = obj[t];
-//			int r = Random.Range(t, obj.Length);
-//			obj[t] = obj[r];
-//			obj[r] = tmp;
-//		}
-//	} //
+	void ShuffleObjectiveArray(GameObject[] obj)
+	{
+		// Knuth shuffle algorithm :: courtesy of Wikipedia :)
+		for (int t = 0; t < obj.Length; t++ )
+		{
+			GameObject tmp = obj[t];
+			int r = Random.Range(t, obj.Length);
+			obj[t] = obj[r];
+			obj[r] = tmp;
+		}
+	} //
+
+	/*void CheckPreviousObjective(GameObject obj) {
+		
+		if (obj == prevObj) {
+			ShuffleObjectiveArray(objectives);
+			FindInactiveObjective();
+		} else {
+			SetObjectiveActive(obj);
+		}
+	}*/
 
 
 	bool CheckIfOjectiveIsActive(GameObject objective){
@@ -90,12 +106,16 @@ public class EventSequenceController : MonoBehaviour {
 			break;
 		}
 	}
+
+	/*GameObject GetPreviousObjective() {
+		
+	}*/
 		
 	IEnumerator UpdateSequenceInterval(){
 		while (true) {
 			yield return new WaitForSeconds (1f);
 			gameTimer--; 
-			Debug.Log("hi");
+//			Debug.Log("hi");
 //			switch (gameTimer) {
 //			case 10:
 //				objectiveSequenceInterval = 3f;

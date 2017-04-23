@@ -161,7 +161,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 243442710042536642, guid: d2e990bc03dbd4f2e81143314a2c7dea,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -296,6 +296,7 @@ MonoBehaviour:
   active: 0
   damage: 0.1
   breakingSound: {fileID: 0}
+  installingSound: {fileID: 0}
   pSystemExplode: {fileID: 0}
 --- !u!114 &114900622996240654
 MonoBehaviour:
@@ -311,6 +312,7 @@ MonoBehaviour:
   active: 0
   damage: 5
   breakingSound: {fileID: 8300000, guid: 423fdeeac22de4bfb818dd503dd7a98d, type: 3}
+  installingSound: {fileID: 8300000, guid: e7f69db828d744e8d96c312a556c016a, type: 3}
   pSystemExplode: {fileID: 198841451850289378}
 --- !u!198 &198841451850289378
 ParticleSystem:

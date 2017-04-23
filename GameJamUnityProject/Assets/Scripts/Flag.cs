@@ -19,11 +19,11 @@ public class Flag : MonoBehaviour {
 	public AudioClip flagUpSound;
 
 	void Awake(){
+		source = gameObject.GetComponent<AudioSource>();
 		anim = GetComponent<Animator> ();
 	}
 
 	void Start () {
-		source = gameObject.GetComponent<AudioSource>();
 		StartCoroutine("EventUpdate");
 	} //
 
@@ -45,24 +45,24 @@ public class Flag : MonoBehaviour {
 	} //
 
 	IEnumerator Tell(){
-		float rnPitch = Random.Range(0.9f, 1.1f);
+		float rnPitch = Random.Range(0.95f, 1.05f);
 		float rnVol = Random.Range(0.8f, 1f);
-		// source.pitch = rnPitch;
+		source.pitch = rnPitch;
 		source.PlayOneShot (flagDownSound, rnVol);
 
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.1f);
 		anim.SetBool ("active", true);
 		active = true;
 		timeSinceStart = Time.time;
 	} //
 
 	void Feedback () {
+		float rnVol = Random.Range(0.8f, 1f);
+		source.PlayOneShot (flagUpSound, rnVol);
 		anim.SetBool ("active", false);
-		Debug.Log("Play feedback sound/animation"); 
 	} //
 
 	public void SetActive() {
-//		Debug.Log("FLAG ACTIVE");
 		damageSwitch = true;
 		StartCoroutine("Tell");
 		EventSequenceController.activeObjectives++;

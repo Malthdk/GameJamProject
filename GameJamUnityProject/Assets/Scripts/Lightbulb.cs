@@ -18,16 +18,17 @@ public class Lightbulb : MonoBehaviour {
 	Animator anim;
 	AudioSource source;
 	public AudioClip breakingSound;
+	public AudioClip installingSound;
 
 	public ParticleSystem pSystemExplode;
 
 	void Awake(){
 		anim = GetComponent<Animator> ();
+		source = GetComponent<AudioSource>();
 	}
 
 	void Start () {
-		source = gameObject.GetComponent<AudioSource>();
-		pointLight = gameObject.GetComponentInChildren<Light>();
+		pointLight = GetComponentInChildren<Light>();
 		startingLightValue = pointLight.intensity;
 		StartCoroutine("EventUpdate");
 	} //
@@ -51,8 +52,8 @@ public class Lightbulb : MonoBehaviour {
 
 	IEnumerator Tell(){
 		float rnPitch = Random.Range(0.9f, 1.1f);
+		source.pitch = rnPitch;
 		float rnVol = Random.Range(0.8f, 1f);
-		// source.pitch = rnPitch;
 		source.PlayOneShot (breakingSound, rnVol);
 
 		yield return new WaitForSeconds(0.5f);
@@ -67,7 +68,8 @@ public class Lightbulb : MonoBehaviour {
 		
 	void Feedback () {
 		anim.SetBool ("active", false);
-		Debug.Log("Play feedback sound/animation"); 
+		float rnVol = Random.Range(0.8f, 1f);
+		source.PlayOneShot (installingSound, rnVol);
 	} //
 
 	public void SetActive() {
