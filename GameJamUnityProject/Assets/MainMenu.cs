@@ -6,10 +6,20 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour {
 
 	public void PlayTutorial () {
-		SceneManager.LoadScene (3);
+		StartCoroutine ("LoadTutL");
 	}
 	
 	public void PlayGame () {
+		StartCoroutine ("LoadGameL");
+	}
+
+	IEnumerator LoadTutL(){
+		yield return new WaitForSeconds (0.5f);
+		SceneManager.LoadScene (3);
+	}
+
+	IEnumerator LoadGameL(){
+		yield return new WaitForSeconds (0.5f);
 		SceneManager.LoadScene (2);
 	}
 }
