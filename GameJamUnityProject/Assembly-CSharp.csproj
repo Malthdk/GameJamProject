@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\EventSequenceController.cs" />
      <Compile Include="Assets\Scripts\FilmCanvas.cs" />
      <Compile Include="Assets\Scripts\Flag.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\KubrickAI.cs" />
      <Compile Include="Assets\Scripts\Lightbulb.cs" />
      <Compile Include="Assets\Scripts\MovingLightbulb.cs" />
