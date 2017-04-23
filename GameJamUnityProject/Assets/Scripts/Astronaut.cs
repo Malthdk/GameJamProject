@@ -8,10 +8,9 @@ public class Astronaut : MonoBehaviour {
 
 	public bool active;
 	bool damageSwitch;
-	float allowedReactionTime = 2f;
 
 	[SerializeField]
-	float damage = 0.1f;
+	float damage = 0.1f, allowedReactionTime = 2f;
 
 	float timeSinceStart, timeSinceActive;
 

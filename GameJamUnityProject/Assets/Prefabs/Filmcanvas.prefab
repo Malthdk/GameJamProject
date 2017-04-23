@@ -214,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   damage: 0.1
+  allowedReactionTime: 0.7
   canvasFalling: {fileID: 8300000, guid: c9e5398bd804643648809d001ec195b9, type: 3}
   canvasFixing: {fileID: 8300000, guid: abcf8f3b9cdce4a7ea02635ffb8731bd, type: 3}
 --- !u!212 &212076497642107362

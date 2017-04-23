@@ -4,4 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/DanTutorial/IntroNew.unity
+  - enabled: 0
+    path: Assets/Scenes/Intro.unity
+  - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+  - enabled: 1
+    path: Assets/DanTutorial/TutorialSceneDan.unity
+  - enabled: 1
+    path: Assets/Scenes/SpaceOutro.unity

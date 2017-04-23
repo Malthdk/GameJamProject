@@ -8,7 +8,7 @@ public class EventSequenceController : MonoBehaviour {
 
 	public static int activeObjectives;
 
-	public bool active;
+	public bool active = false;
 	bool firstObjective;
 	int stages; 
 	public int gameTimer;
@@ -43,6 +43,7 @@ public class EventSequenceController : MonoBehaviour {
 				FindInactiveObjective ();	
 				yield return new WaitForSeconds (objectiveSequenceInterval);
 			} // if active
+			yield return null;
 		}
 	} //
 
@@ -113,28 +114,31 @@ public class EventSequenceController : MonoBehaviour {
 		
 	IEnumerator UpdateSequenceInterval(){
 		while (true) {
-			yield return new WaitForSeconds (1f);
-			gameTimer--; 
-//			Debug.Log("hi");
-//			switch (gameTimer) {
-//			case 10:
-//				objectiveSequenceInterval = 3f;
-//				break;
-//			case 20:
-//				objectiveSequenceInterval = 2.5f;
-//				break;
-//			case 30:
-//				objectiveSequenceInterval = 2f;
-//				break;
-//			case 40:
-//				objectiveSequenceInterval = 1.5f;
-//				break;
-//			case 50:
-//				objectiveSequenceInterval = 1f;
-//				break;
-//			default:
-//				break;
-//			} // switch
+			if (active) {
+				yield return new WaitForSeconds (1f);
+				gameTimer--; 
+
+				switch (gameTimer) {
+				case 50:
+					objectiveSequenceInterval = 3f;
+					break;
+				case 40:
+					objectiveSequenceInterval = 2.5f;
+					break;
+				case 30:
+					objectiveSequenceInterval = 2f;
+					break;
+				case 20:
+					objectiveSequenceInterval = 1.5f;
+					break;
+				case 10:
+					objectiveSequenceInterval = 1f;
+					break;
+				default:
+					break;
+				} // switch
+			}
+			yield return null;
 		}
 	} //
 

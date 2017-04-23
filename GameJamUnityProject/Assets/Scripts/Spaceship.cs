@@ -61,10 +61,10 @@ public class Spaceship : MonoBehaviour {
 
 				anim.Play ("Active", 0, animRate);
 
-				if(animRate > 0.7f && damageSwitch){
+				if(animRate > 0.2f && damageSwitch){
 					ScoreBar.scoreDecreaseMultiplier += damage;
 					damageSwitch = false;
-				} else if (animRate < 0.7f && !damageSwitch) {
+				} else if (animRate < 0.2f && !damageSwitch) {
 					ScoreBar.scoreDecreaseMultiplier -= damage;
 					damageSwitch = true;
 				}

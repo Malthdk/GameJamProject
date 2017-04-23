@@ -52,12 +52,15 @@ public class PlayerInput : MonoBehaviour {
 		}
 
 		else if (tag == "rope")	{
+			Rope.instance.Pull ();
 			if (mouseHold) {
 				Debug.Log ("hold rope");
 				Astronaut.instance.Lift ();
+				Rope.instance.Pull ();
 			} else {
 				Debug.Log ("releaseRope");
-				Astronaut.instance.NotLifting ();
+				Astronaut.instance.NotLifting ();	
+				Rope.instance.Release ();
 			}
 		}
 		else if (tag == "pump")	{
@@ -91,6 +94,7 @@ public class PlayerInput : MonoBehaviour {
 			lightBulbImage.enabled = false;
 			draggingBulb = false;
 			Astronaut.instance.NotLifting ();
+			Rope.instance.Release ();		
 		}
 	} // 
 }

@@ -26,7 +26,7 @@ public class KubrickAI : MonoBehaviour {
 	private string good = "You are doing great! The world believes in us!";
 	private string good2 = "Ha ha! This is perfect! Next we're doing Mars!";
 
-	private string medium = "Come on! Work harder! I will not let you embaress me like this!";
+	private string medium = "Come on! Work harder! I will not let you embarass me like this!";
 	private string medium2 = "Don't you get it! We WANT them to think we are ON THE MOON!";
 
 	private string bad = "WHAT ARE YOU DOING YOU BLABBERING IDIOT!!!";

@@ -295,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   damage: 0.1
+  allowedReactionTime: 2
   breakingSound: {fileID: 0}
   installingSound: {fileID: 0}
   pSystemExplode: {fileID: 0}
@@ -311,6 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   damage: 5
+  allowedReactionTime: 0.7
   breakingSound: {fileID: 8300000, guid: 423fdeeac22de4bfb818dd503dd7a98d, type: 3}
   installingSound: {fileID: 8300000, guid: e7f69db828d744e8d96c312a556c016a, type: 3}
   pSystemExplode: {fileID: 198841451850289378}
