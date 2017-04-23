@@ -53,8 +53,10 @@ public class PlayerInput : MonoBehaviour {
 
 		else if (tag == "rope")	{
 			if (mouseHold) {
+				Debug.Log ("hold rope");
 				Astronaut.instance.Lift ();
 			} else {
+				Debug.Log ("releaseRope");
 				Astronaut.instance.NotLifting ();
 			}
 		}

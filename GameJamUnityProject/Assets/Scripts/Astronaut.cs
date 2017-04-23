@@ -27,7 +27,7 @@ public class Astronaut : MonoBehaviour {
 	Transform walkBoundMin, walkBoundMax, liftBound;
 
 	void Awake(){
-		anim = GetComponent<Animator> ();
+		anim = GetComponentInChildren<Animator> ();
 		rig = GetComponent<Rigidbody2D> ();
 		source = gameObject.GetComponent<AudioSource>();
 		sp = GetComponentInChildren<SpriteRenderer> ();
@@ -49,6 +49,7 @@ public class Astronaut : MonoBehaviour {
 			if (active) {
 				timeSinceActive = Time.time - timeSinceStart;
 				CheckForDamageable ();
+				HandleLift ();
 			} else {
 				Walk ();
 			} // active
@@ -69,11 +70,15 @@ public class Astronaut : MonoBehaviour {
 	void HandleLift(){
 		if (!complete) {
 			if (lifting) {
+				rig.gravityScale = 0f;
 				if (transform.position.y >= liftBound.position.y) {
 					complete = true;
-				} else { 
+					rig.gravityScale = 1f;
+				} else {
 					transform.position = new Vector2 (transform.position.x, transform.position.y + liftRate);
 				}
+			} else {
+				rig.gravityScale = 1f;
 			} // lifting
 		}
 	} //
@@ -105,7 +110,6 @@ public class Astronaut : MonoBehaviour {
 		active = true;
 		complete = false;
 		rig.velocity = new Vector2 (0f, 0f);
-		anim.CrossFade ("Astronaut_Tell", 0f);
 	} //
 
 	public void SetInactive() {
@@ -113,21 +117,22 @@ public class Astronaut : MonoBehaviour {
 		active = false;
 	} //
 
-	void OnTriggerEnter2D(Collider2D other) {
+	void OnTriggerStay2D(Collider2D other) {
 		if (other.transform.tag == "ground") {
 			if (active && !complete) {
-				anim.CrossFade ("Astronaut_Tell", 0f);
-			}else if (active && !complete) {
+				anim.CrossFade ("Astronaut_Tell", 0f, 0);
+			}else if (active && complete) {
 				SetInactive ();
-				anim.CrossFade ("Walking", 0f);
+				anim.CrossFade ("Walking", 0f, 0);
 			}
+			grounded = true;
 		}
 	} //
 
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.transform.tag == "ground") {
 			if (active) {
-				anim.CrossFade ("Astronaut_InAir", 0f);
+				anim.CrossFade ("Astronaut_InAir", 0f, 0);
 			}
 			grounded = false;
 		}

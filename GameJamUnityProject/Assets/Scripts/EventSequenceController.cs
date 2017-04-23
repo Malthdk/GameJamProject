@@ -89,9 +89,9 @@ public class EventSequenceController : MonoBehaviour {
 		case "bulb":
 			return objective.GetComponent<Lightbulb> ().active;
 			break;
-//		case "rope":
-//			// return objective.GetComponent<Lightbulb> ().active;
-//			break;
+		case "astronaut":
+			return objective.GetComponent<Astronaut> ().active;
+			break;
 		case "flag":
  			return objective.GetComponent<Flag> ().active;
 			break;
@@ -156,9 +156,9 @@ public class EventSequenceController : MonoBehaviour {
 		case "bulb":
 			objective.GetComponent<Lightbulb> ().SetActive ();
 			break;
-//		case "rope":
-//			// objective.GetComponent<Lightbulb> ().SetActive ();
-//			break;
+		case "astronaut":
+			objective.GetComponent<Astronaut> ().SetActive ();
+			break;
 		case "flag":
 			objective.GetComponent<Flag> ().SetActive ();
 			break;
