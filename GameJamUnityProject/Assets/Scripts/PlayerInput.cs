@@ -90,11 +90,12 @@ public class PlayerInput : MonoBehaviour {
 				lightBulbImage.enabled = false;
 				draggingBulb = false;
 			}
+		} else if (hit.transform.tag == "rope") {
+			Rope.instance.Release ();
 		} else  {
 			lightBulbImage.enabled = false;
 			draggingBulb = false;
 			Astronaut.instance.NotLifting ();
-			Rope.instance.Release ();		
 		}
 	} // 
 }

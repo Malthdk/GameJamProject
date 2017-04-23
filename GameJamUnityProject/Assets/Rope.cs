@@ -40,7 +40,7 @@ public class Rope : MonoBehaviour {
 				rate = 1f;
 			}
 
-			Debug.Log (rate);
+//			Debug.Log (rate);
 				
 			anim.Play ("PulldownRopeAnim", 0, rate);
 			yield return new WaitForSeconds(0.05f);
