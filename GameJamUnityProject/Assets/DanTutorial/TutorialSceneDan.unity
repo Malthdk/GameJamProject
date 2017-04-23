@@ -236,7 +236,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 10cf2fe457b06492f848372dd6712a9c, type: 3}
     m_FontSize: 10
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
@@ -1584,15 +1584,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4236605341611726, guid: 2a5f9937dbc7548528ed4f4d8ad327dd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.05
+      value: -7.56
       objectReference: {fileID: 0}
     - target: {fileID: 4236605341611726, guid: 2a5f9937dbc7548528ed4f4d8ad327dd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.09
+      value: -4.65
       objectReference: {fileID: 0}
     - target: {fileID: 4236605341611726, guid: 2a5f9937dbc7548528ed4f4d8ad327dd, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -13.51
+      value: -9.802
       objectReference: {fileID: 0}
     - target: {fileID: 4236605341611726, guid: 2a5f9937dbc7548528ed4f4d8ad327dd, type: 2}
       propertyPath: m_LocalRotation.x
