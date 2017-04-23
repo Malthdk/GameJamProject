@@ -16,11 +16,16 @@ public class Spaceship : MonoBehaviour {
 	float damage = 0.1f;
 
 	Animator anim;
+	AudioSource source;
+	public AudioClip deflatingSound;
+	public AudioClip inflatingSound;
+	public AudioClip finishSound;
 
 	float animRate;
 
 	void Awake(){
 		anim = GetComponent<Animator> ();
+		source = GetComponent<AudioSource> ();
 
 		if (instance == null) {
 			instance = this;
@@ -35,6 +40,10 @@ public class Spaceship : MonoBehaviour {
 		
 	public void SetActive() {
 		anim.SetBool ("active", true);
+		float rnPitch = Random.Range (0.9f, 1.1f);
+		source.pitch = rnPitch;
+		float rnVol = Random.Range(0.8f, 1f);
+		source.PlayOneShot (deflatingSound, rnVol);
 		active = true;
 		timeSinceStart = Time.time;
 		EventSequenceController.activeObjectives++;
@@ -55,7 +64,7 @@ public class Spaceship : MonoBehaviour {
 				if(animRate > 0.7f && damageSwitch){
 					ScoreBar.scoreDecreaseMultiplier += damage;
 					damageSwitch = false;
-				}else if (animRate < 0.7f && !damageSwitch) {
+				} else if (animRate < 0.7f && !damageSwitch) {
 					ScoreBar.scoreDecreaseMultiplier -= damage;
 					damageSwitch = true;
 				}
@@ -74,8 +83,10 @@ public class Spaceship : MonoBehaviour {
 			active = false;
 		}
 		anim.Play ("Active", 0, animRate);
-
+		float rnVol = Random.Range(0.8f, 1f);
+		source.PlayOneShot (inflatingSound, 0.2f);
 		if (animRate == 0.0f) {
+			source.PlayOneShot (finishSound, rnVol);
 			active = false;
 			anim.SetBool ("active", false);
 			EventSequenceController.activeObjectives--;

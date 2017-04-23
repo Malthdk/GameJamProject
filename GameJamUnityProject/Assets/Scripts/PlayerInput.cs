@@ -61,8 +61,10 @@ public class PlayerInput : MonoBehaviour {
 			}
 		}
 		else if (tag == "pump")	{
-			Spaceship.instance.Inflate();
-			Pump.instance.PumpAnim ();
+			if (hit.transform.GetComponentInParent<Spaceship>().active) {
+				Spaceship.instance.Inflate();
+				Pump.instance.PumpAnim ();
+			}
 		}
 		else if (tag == "flag") {
 			if (hit.transform.GetComponent<Flag>().active) {

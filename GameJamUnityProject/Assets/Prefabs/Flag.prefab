@@ -168,8 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   damage: 0.1
-  flagDownSound: {fileID: 0}
-  flagUpSound: {fileID: 0}
+  flagDownSound: {fileID: 8300000, guid: 90498da0aa46d46a0ab029758e7b1fbc, type: 3}
+  flagUpSound: {fileID: 8300000, guid: 1f93e72495fe549c88d8df15f2982af4, type: 3}
 --- !u!212 &212984484873871392
 SpriteRenderer:
   m_ObjectHideFlags: 1
