@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4541849689226396}
   - component: {fileID: 212298572020041506}
-  - component: {fileID: 61065643554582674}
   - component: {fileID: 61417571082235266}
   - component: {fileID: 82526200489894658}
   - component: {fileID: 95425673657306630}
@@ -55,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1689993701893058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: 1.1, z: -9.42}
+  m_LocalPosition: {x: -0.16, y: 1.1, z: -8.2}
   m_LocalScale: {x: 0.32, y: 0.32, z: 1}
   m_Children:
   - {fileID: 4916303568626190}
@@ -75,20 +74,6 @@ Transform:
   m_Father: {fileID: 4541849689226396}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61065643554582674
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1689993701893058}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -7.4123864, y: 6.5464344}
-  serializedVersion: 2
-  m_Size: {x: 4.731774, y: 3.2135284}
 --- !u!61 &61417571082235266
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -98,7 +83,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 6.4795537, y: -3.8166425}
   serializedVersion: 2
@@ -213,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  damage: 0.1
+  damage: 5
   allowedReactionTime: 0.7
   canvasFalling: {fileID: 8300000, guid: c9e5398bd804643648809d001ec195b9, type: 3}
   canvasFixing: {fileID: 8300000, guid: abcf8f3b9cdce4a7ea02635ffb8731bd, type: 3}

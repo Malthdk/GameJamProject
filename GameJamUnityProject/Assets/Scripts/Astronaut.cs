@@ -15,9 +15,18 @@ public class Astronaut : MonoBehaviour {
 	float timeSinceStart, timeSinceActive;
 
 	Animator anim;
-	AudioSource source;
+	AudioSource mainSource;
 	Rigidbody2D rig;
 	SpriteRenderer sp;
+
+	AudioSource walkSource;
+	AudioSource pullSource;
+	AudioSource jumpSource;
+
+	public AudioClip liftingSound;
+	public AudioClip walkingSound;
+	public AudioClip landSound;
+	public AudioClip tellSound;
 
 	float movementSpeed = -1f, liftRate = 0.05f;
 	bool moveSwitch = true, grounded, lifting, complete;
@@ -28,8 +37,12 @@ public class Astronaut : MonoBehaviour {
 	void Awake(){
 		anim = GetComponentInChildren<Animator> ();
 		rig = GetComponent<Rigidbody2D> ();
-		source = gameObject.GetComponent<AudioSource>();
+		mainSource = GetComponent<AudioSource>();
 		sp = GetComponentInChildren<SpriteRenderer> ();
+
+		walkSource = transform.GetChild(2).transform.GetComponent<AudioSource>();
+		pullSource = transform.GetChild(3).transform.GetComponent<AudioSource>();
+		jumpSource = transform.GetChild(4).transform.GetComponent<AudioSource>();
 
 		if (instance == null) {
 			instance = this;
@@ -59,6 +72,8 @@ public class Astronaut : MonoBehaviour {
 	} //
 
 	public void Lift(){
+		float rnVol = Random.Range(0.8f, 1f);
+		mainSource.PlayOneShot (liftingSound, rnVol);
 		lifting = true;
 	}
 
@@ -85,6 +100,9 @@ public class Astronaut : MonoBehaviour {
 	void Walk(){
 		rig.velocity = new Vector2 (movementSpeed, 0f);
 
+		if (!walkSource.isPlaying)
+			walkSource.PlayOneShot(walkingSound, 0.8f);
+
 		if (transform.position.x <= walkBoundMin.position.x && moveSwitch) {
 			moveSwitch = false;
 			movementSpeed = 1f;
@@ -109,6 +127,7 @@ public class Astronaut : MonoBehaviour {
 		active = true;
 		complete = false;
 		rig.velocity = new Vector2 (0f, 0f);
+		jumpSource.PlayOneShot(tellSound, 0.8f);
 	} //
 
 	public void SetInactive() {
@@ -120,11 +139,18 @@ public class Astronaut : MonoBehaviour {
 		if (other.transform.tag == "ground") {
 			if (active && !complete) {
 				anim.CrossFade ("Astronaut_Tell", 0f, 0);
-			}else if (active && complete) {
+				walkSource.Pause();
+			} else if (active && complete) {
 				SetInactive ();
 				anim.CrossFade ("Walking", 0f, 0);
 			}
 			grounded = true;
+		}
+	} //
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.transform.tag == "ground") {
+			mainSource.PlayOneShot(landSound, 0.8f);
 		}
 	} //
 

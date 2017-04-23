@@ -19,11 +19,7 @@ public class CountDown : MonoBehaviour {
 	
 	IEnumerator Countdown () {
 		count.text = "Ready";
-		yield return new WaitForSeconds (3f);
-		count.text = "5";
-		yield return new WaitForSeconds (1f);
-		count.text = "4";
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (2f);
 		count.text = "3";
 		yield return new WaitForSeconds (1f);
 		count.text = "2";
